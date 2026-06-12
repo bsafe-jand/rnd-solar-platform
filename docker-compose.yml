@@ -1,0 +1,65 @@
+# ============================================================
+# Solar Monitor — InfluxDB v2 + Grafana Stack
+# ============================================================
+#
+# Quick start (run on 192.168.0.3):
+#   docker compose up -d
+#
+# Access:
+#   InfluxDB UI  → http://192.168.0.3:8086
+#   Grafana      → http://192.168.0.3:3001  (admin / changeme123)
+#
+# ── TOKEN PLACEHOLDER ────────────────────────────────────────
+# Replace INFLUX_TOKEN_HERE in ALL THREE places before starting:
+#
+#   1. This file (line below):
+#        DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: INFLUX_TOKEN_HERE
+#
+#   2. grafana/provisioning/datasources/influxdb.yaml
+#        token: INFLUX_TOKEN_HERE
+#
+#   3. nodered-flow.json → "format-influx" function node
+#        const INFLUX_TOKEN = 'INFLUX_TOKEN_HERE';
+#
+# A token must be at least 32 characters. Example (generate your own):
+#   openssl rand -hex 32
+# ============================================================
+
+services:
+
+  influxdb:
+    image: influxdb:2
+    container_name: influxdb
+    restart: unless-stopped
+    ports:
+      - "8086:8086"
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE:         setup
+      DOCKER_INFLUXDB_INIT_USERNAME:     admin
+      DOCKER_INFLUXDB_INIT_PASSWORD:     changeme123
+      DOCKER_INFLUXDB_INIT_ORG:          solar
+      DOCKER_INFLUXDB_INIT_BUCKET:       victron
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN:  INFLUX_TOKEN_HERE   # <── change here (place 1)
+    volumes:
+      - influxdb-data:/var/lib/influxdb2
+      - influxdb-config:/etc/influxdb2
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - "3001:3000"   # 3001 on host to avoid conflicts with Signal K on 3000
+    environment:
+      GF_SECURITY_ADMIN_USER:     admin
+      GF_SECURITY_ADMIN_PASSWORD: changeme123
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+    depends_on:
+      - influxdb
+
+volumes:
+  influxdb-data:
+  influxdb-config:
+  grafana-data:

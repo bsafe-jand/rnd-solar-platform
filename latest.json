@@ -1,0 +1,62 @@
+{
+    "timestamp": "2026-06-08 20:33:19",
+    "portalId": "2ccf676178d7",
+    "solar": {
+        "290": {
+            "panelVoltage_V": 0.01,
+            "panelCurrent_A": null,
+            "panelPower_W": 0,
+            "outputVoltage_V": 12.8,
+            "outputCurrent_A": 0,
+            "outputPower_W": null,
+            "yieldToday_Wh": 0,
+            "yieldYesterday_Wh": 0,
+            "yieldTotal_Wh": null,
+            "maxPowerToday_W": null,
+            "controllerMode": "not charging",
+            "errorCode": null,
+            "chargeState": null,
+            "temperature_C": null
+        }
+    },
+    "batteries": [],
+    "inverters": [],
+    "acGrid": [],
+    "acLoads": [],
+    "genset": [],
+    "dc": {
+        "systemVoltage_V": null,
+        "systemCurrent_A": null,
+        "systemPower_W": null
+    },
+    "tanks": [],
+    "environment": {
+        "inside": {
+            "temperature_C": null,
+            "humidity_pct": null
+        },
+        "outside": {
+            "temperature_C": null,
+            "humidity_pct": null,
+            "pressure_hPa": null
+        },
+        "water": {
+            "temperature_C": null
+        },
+        "solar": {
+            "irradiance_Wm2": null
+        }
+    },
+    "navigation": {
+        "latitude": null,
+        "longitude": null,
+        "speedOverGround_ms": null,
+        "courseOverGround_deg": null,
+        "headingTrue_deg": null,
+        "headingMagnetic_deg": null,
+        "altitude_m": null,
+        "satellites": null,
+        "fixType": null
+    },
+    "received_at": "2026-06-10 12:47:03"
+}

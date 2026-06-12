@@ -1,0 +1,23 @@
+# ============================================================
+# Grafana datasource provisioning — InfluxDB v2 (Flux query language)
+#
+# TOKEN PLACEHOLDER — change "INFLUX_TOKEN_HERE" below (place 2 of 3).
+# See docker-compose.yml for the full token checklist.
+# ============================================================
+
+apiVersion: 1
+
+datasources:
+  - name: InfluxDB
+    type: influxdb
+    access: proxy
+    url: http://influxdb:8086   # Docker service name resolves inside Compose network
+    jsonData:
+      version:       Flux
+      organization:  solar
+      defaultBucket: victron
+      tlsSkipVerify: true
+    secureJsonData:
+      token: INFLUX_TOKEN_HERE  # <── change here (place 2)
+    isDefault: true
+    editable:  true
